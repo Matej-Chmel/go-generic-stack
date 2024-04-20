@@ -28,9 +28,14 @@ func (s *Stack[T]) ClearWithCapacity(c int) {
 	s.data = make([]T, 0, c)
 }
 
-// Returns bool indicating if at least one item is in the stack.
+// Returns bool indicating if no items are in the stack.
 func (s *Stack[T]) Empty() bool {
 	return len(s.data) == 0
+}
+
+// Returns bool indicating if at least one item is in the stack.
+func (s *Stack[T]) HasItems() bool {
+	return len(s.data) > 0
 }
 
 func (s *Stack[T]) guard() error {
@@ -139,8 +144,14 @@ func (s *Stack[T]) UpdateCapacity(n int) error {
 }
 
 // Returns a copy of the top item without removing it from the stack.
-func (s *Stack[T]) Top() T {
-	return s.data[len(s.data)-1]
+// If the stack is empty, an error is returned.
+func (s *Stack[T]) Top() (T, error) {
+	if err := s.guard(); err != nil {
+		var none T
+		return none, err
+	}
+
+	return s.data[len(s.data)-1], nil
 }
 
 func (s *Stack[T]) writeItem(builder *strings.Builder, i int, sep string) {

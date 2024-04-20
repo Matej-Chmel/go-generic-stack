@@ -21,8 +21,9 @@ func checkPop[T comparable](stack *gostack.Stack[T], expected T, t *testing.T) {
 }
 
 func checkTop[T comparable](stack *gostack.Stack[T], expected T, t *testing.T) {
-	top := stack.Top()
+	top, err := stack.Top()
 	check(top, expected, t)
+	check(err, nil, t)
 }
 
 func runTest[T comparable](data []T, t *testing.T) {
@@ -30,6 +31,7 @@ func runTest[T comparable](data []T, t *testing.T) {
 	stack.PushSlice(data)
 
 	check(stack.Empty(), false, t)
+	check(stack.HasItems(), true, t)
 	check(stack.Len(), len(data), t)
 
 	stack.UpdateCapacity(stack.Len() * 2)
@@ -65,9 +67,11 @@ func TestInt32Simple(t *testing.T) {
 	stack.Push(2)
 	stack.Push(3)
 
-	check(3, stack.Top(), t)
+	top, err := stack.Top()
+	check(3, top, t)
+	check(nil, err, t)
 
-	top, err := stack.Pop()
+	top, err = stack.Pop()
 	check(3, top, t)
 	check(nil, err, t)
 
