@@ -1,5 +1,7 @@
-# Stack
-Simple stack data structure.
+# Generic stack
+Stack data structure with generics.
+
+## Example
 
 ```go
 package main
@@ -7,7 +9,7 @@ package main
 import (
     "fmt"
 
-    gostack "github.com/Matej-Chmel/go-stack"
+    gostack "github.com/Matej-Chmel/go-generic-stack"
 )
 
 func main() {

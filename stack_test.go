@@ -4,7 +4,7 @@ import (
 	"runtime"
 	"testing"
 
-	gostack "github.com/Matej-Chmel/go-stack"
+	gostack "github.com/Matej-Chmel/go-generic-stack"
 )
 
 func check[T comparable](a, b T, t *testing.T) {
