@@ -1,4 +1,4 @@
-package gostack_test
+package genericstack_test
 
 import (
 	"runtime"

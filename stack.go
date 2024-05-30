@@ -1,5 +1,5 @@
 // Package for simple LIFO stack data structure.
-package gostack
+package genericstack
 
 import (
 	"errors"
