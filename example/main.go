@@ -1,23 +1,3 @@
-# Generic stack
-Generic stack data structure.
-
-## Installation
-```bash
-go get github.com/Matej-Chmel/go-generic-stack@v1.0.4
-```
-
-## Example
-An example illustrates the following features
-
-- Construction
-- Push and pop operations
-- Copy of the top
-- Changing top in-place using a pointer
-- Reading information about the stack (empty, length, capacity)
-- Converting the stack into a string using formatting options
-- Clear operation
-
-```go
 package main
 
 import (
@@ -59,4 +39,3 @@ func main() {
 	stack.Clear()
 	fmt.Println(stack) // []
 }
-```
