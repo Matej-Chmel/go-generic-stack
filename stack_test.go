@@ -34,7 +34,7 @@ func (t *tester) check(values ...any) {
 	}
 
 	if (len(values) & 1) == 1 {
-		t.fail("There is an odd number (%d) of values", len(values))
+		t.fail(2, "There is an odd number (%d) of values", len(values))
 		return
 	}
 
@@ -44,17 +44,19 @@ func (t *tester) check(values ...any) {
 		i += 2
 
 		if !reflect.DeepEqual(a, b) {
-			t.fail("%v != %v", a, b)
+			t.fail(2, "%v != %v", a, b)
 			break
 		}
 	}
 }
 
-func (t *tester) fail(format string, data ...any) {
-	_, _, line, ok := runtime.Caller(2)
+func (t *tester) fail(skip int, format string, data ...any) {
+	if skip > 0 {
+		_, _, line, ok := runtime.Caller(skip)
 
-	if ok {
-		format = fmt.Sprintf("(line %d) %s", line, format)
+		if ok {
+			format = fmt.Sprintf("(line %d) %s", line, format)
+		}
 	}
 
 	t.Errorf(format, data...)
@@ -63,7 +65,7 @@ func (t *tester) fail(format string, data ...any) {
 
 func (t *tester) shouldPanic() {
 	if data := recover(); data == nil {
-		t.fail("Test should panic but doesn't")
+		t.fail(0, "Test should panic but doesn't")
 	}
 }
 
